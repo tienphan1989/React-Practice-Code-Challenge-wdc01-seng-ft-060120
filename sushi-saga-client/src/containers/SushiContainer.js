@@ -1,16 +1,26 @@
 import React, { Fragment } from 'react'
 import MoreButton from '../components/MoreButton'
+import Sushi from "../components/Sushi"
 
 const SushiContainer = (props) => {
+
+  const renderFreshSushi = () => props.freshSushi.map(freshSushiMapper);
+  const freshSushiMapper = (sushi) => {
+    return <Sushi key={sushi.id} sushi={sushi} 
+    eatenSushi={props.eatenSushi} 
+    consumeSushi={props.consumeSushi} />
+  } 
+
+  
+
   return (
     <Fragment>
       <div className="belt">
-        {
-          /* 
-             Render Sushi components here!
-          */
-        }
-        <MoreButton />
+        {renderFreshSushi()}
+        {props.freshSushi.length === 0
+        ? 
+        <MoreButton requestMoreSushi={props.requestMoreSushi}/> 
+        : null}
       </div>
     </Fragment>
   )
